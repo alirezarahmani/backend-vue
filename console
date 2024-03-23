@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/vendor/autoload.php';
+
+use App\Application\ConsoleCommand\GetTotalTransactionsCommand;
+use App\Application\ConsoleCommand\GetUserTransactionsCommand;
+use App\Application\ConsoleCommand\PopulateUsersCommand;
+use Symfony\Component\Console\Application;
+use App\Application\ConsoleCommand\AddTransaction;
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$application = new Application();
+
+
+
+// ... register commands
+//@todo add autoload
+$application->add(new AddTransaction());
+$application->add(new PopulateUsersCommand());
+$application->add(new GetUserTransactionsCommand());
+$application->add(new GetTotalTransactionsCommand());
+
+$application->setCatchExceptions(false);
+$application->run();
