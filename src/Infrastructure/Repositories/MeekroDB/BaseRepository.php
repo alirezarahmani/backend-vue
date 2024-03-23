@@ -3,9 +3,8 @@
 namespace App\Infrastructure\Repositories\MeekroDB;
 
 use DB;
-use http\Env;
 
-abstract readonly class BaseRepository
+abstract class BaseRepository
 {
 
     public function __construct(protected readonly string $table)

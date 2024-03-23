@@ -9,14 +9,14 @@ use App\Domain\Events\TransactionSubscriber;
 use App\Domain\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-readonly class TransactionRepository extends BaseRepository implements RepositoryInterface
+class TransactionRepository extends BaseRepository implements RepositoryInterface
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function addTransaction(Transaction $transaction)
+    public function addTransaction(Transaction $transaction): void
     {
         $key = $transaction->getFormattedDate();
         if (!$this->exists($transaction->getCreatedAt())) {
@@ -30,7 +30,7 @@ readonly class TransactionRepository extends BaseRepository implements Repositor
         }
     }
 
-    public function updateTotalDay(\DateTime $date, int $total)
+    public function updateTotalDay(\DateTime $date, int $total): void
     {
         $key = Transaction::formatDate($date);
         $this->client->set($key, $total);
@@ -42,7 +42,7 @@ readonly class TransactionRepository extends BaseRepository implements Repositor
         return $this->client->get($key);
     }
 
-    public function exists(\DateTime $date)
+    public function exists(\DateTime $date): int
     {
         $key = Transaction::formatDate($date);
         return $this->client->exists($key);

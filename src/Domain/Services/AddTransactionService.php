@@ -10,15 +10,15 @@ use Assert\Assertion;
 use Money\Money;
 use Ramsey\Uuid\Uuid;
 
-class AddTransactionService
+readonly class AddTransactionService
 {
-    public function __construct(private readonly RepositoryInterface $userRepository, private readonly RepositoryInterface $transactionRepository)
+    public function __construct(private RepositoryInterface $userRepository, private RepositoryInterface $transactionRepository)
     {
     }
 
-    public function add(string $userId, int $amount)
+    public function add(string $userId, int $amount): void
     {
-        Assertion::uuid($userId);
+        Assertion::uuid($userId, 'wrong uuid: ' . $userId);
         Assertion::notEq(0, $amount, 'you can not add 0 amount');
         $results = $this->userRepository->findById(Uuid::fromString($userId));
         Assertion::notEmpty($results, 'wrong id is inserted');

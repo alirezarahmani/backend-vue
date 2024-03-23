@@ -12,14 +12,14 @@ class User
 
     private Money $credit;
 
-    public function __construct(private Name $name)
+    public function __construct(private readonly Name $name)
     {
         $this->id = Uuid::uuid4();
         $this->credit = Money::EUR(0);
         $this->setCreatedAt(new \DateTime());
     }
 
-    public static function mapUser(string $id, string $name, int $credit)
+    public static function mapUser(string $id, string $name, int $credit): User
     {
         $user = new self(new Name($name));
         $user->setId($id);
@@ -35,7 +35,7 @@ class User
         return $this->credit;
     }
 
-    private function setCredit(Money $credit)
+    private function setCredit(Money $credit): void
     {
         $this->credit = $credit;
     }

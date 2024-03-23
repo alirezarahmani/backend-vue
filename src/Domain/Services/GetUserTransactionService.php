@@ -6,10 +6,10 @@ use App\Domain\RepositoryInterface;
 use Assert\Assertion;
 use Ramsey\Uuid\Uuid;
 
-class GetUserTransactionService
+readonly class GetUserTransactionService
 {
     public function __construct(
-        private readonly RepositoryInterface $transactionRepository
+        private RepositoryInterface $transactionRepository
     )
     {
     }

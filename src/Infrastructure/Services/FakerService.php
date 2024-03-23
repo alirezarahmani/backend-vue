@@ -13,7 +13,10 @@ use Money\Money;
 
 final readonly class FakerService
 {
-    public function __construct(private RepositoryInterface $userRepository, private RepositoryInterface $transactionRepository)
+    public function __construct(
+        private RepositoryInterface $userRepository,
+        private RepositoryInterface $transactionRepository
+    )
     {
     }
 

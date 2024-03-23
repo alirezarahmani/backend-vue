@@ -7,10 +7,10 @@ use App\Domain\Events\TransactionSubscriber;
 use App\Domain\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class GetAllTransactionService
+readonly class GetAllTransactionService
 {
     public function __construct(
-        private readonly RepositoryInterface $transactionRedisRepository,
+        private RepositoryInterface $transactionRedisRepository,
     )
     {
     }

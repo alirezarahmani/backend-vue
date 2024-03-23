@@ -8,7 +8,7 @@ use Money\Money;
 use App\Domain\RepositoryInterface;
 use Ramsey\Uuid\UuidInterface;
 
-readonly class UserRepository extends BaseRepository implements RepositoryInterface
+class UserRepository extends BaseRepository implements RepositoryInterface
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ readonly class UserRepository extends BaseRepository implements RepositoryInterf
         DB::insert($this->table, ['id' => $user->getId(), 'name' => $user->getName(), 'credit' => 0, 'createdAt' => $user->getCreatedAt()->format("Y-m-d H:i:s")]);
     }
 
-    public function increaseCredit(User $user, Money $amount)
+    public function increaseCredit(User $user, Money $amount): void
     {
         $amount = $user->getCredit()->add($amount);
         DB::update($this->table, ['credit' => $amount->getAmount()], "id=%s", $user->getId());

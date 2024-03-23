@@ -10,7 +10,7 @@ use DB;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-readonly class TransactionRepository extends BaseRepository implements RepositoryInterface
+class TransactionRepository extends BaseRepository implements RepositoryInterface
 {
     public function __construct()
     {

@@ -4,9 +4,9 @@ namespace App\Infrastructure\Repositories\Redis;
 
 use Predis\Client;
 
-abstract readonly class BaseRepository
+abstract class BaseRepository
 {
-    protected readonly Client $client;
+    protected Client $client;
 
     public function __construct()
     {
