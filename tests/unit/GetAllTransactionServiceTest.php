@@ -15,7 +15,7 @@ class GetAllTransactionServiceTest extends TestCase
     {
         $date = new \DateTime('2024-02-15');
         $repository = $this->prophesize(TransactionRepository::class);
-        $repository->exists($date)->willReturn(true);
+        $repository->exists($repository->getKey($date))->willReturn(true);
         $repository->getAllOfDay($date)->willReturn(10);
 
         $service = new GetAllTransactionService($repository->reveal());

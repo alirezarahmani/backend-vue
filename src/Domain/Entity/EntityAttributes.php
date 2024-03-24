@@ -34,7 +34,7 @@ trait EntityAttributes
 
     public function setId(string $id): void
     {
-        Assertion::uuid($id, 'only valid uuid is needed');
+        Assertion::uuid($id, 'only valid uuid is allowed');
         $this->id = $id;
     }
 

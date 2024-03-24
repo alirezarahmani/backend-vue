@@ -18,8 +18,8 @@ class TransactionRepository extends BaseRepository implements RepositoryInterfac
 
     public function addTransaction(Transaction $transaction): void
     {
-        $key = $transaction->getFormattedDate();
-        if (!$this->exists($transaction->getCreatedAt())) {
+        $key = $this->getKey($transaction->getCreatedAt());
+        if (!$this->exists($key)) {
             $event = new TransactionCachedMissedEvent($transaction->getCreatedAt());
             $dispatcher = new EventDispatcher();
             $dispatcher->addSubscriber(new TransactionSubscriber());
@@ -32,19 +32,21 @@ class TransactionRepository extends BaseRepository implements RepositoryInterfac
 
     public function updateTotalDay(\DateTime $date, int $total): void
     {
-        $key = Transaction::formatDate($date);
-        $this->client->set($key, $total);
+        $this->client->set($this->getKey($date), $total);
     }
 
     public function getAllOfDay(\DateTime $date): ?string
     {
-        $key = Transaction::formatDate($date);
-        return $this->client->get($key);
+        return $this->client->get($this->getKey($date));
     }
 
-    public function exists(\DateTime $date): int
+    public function exists(string $key): int
     {
-        $key = Transaction::formatDate($date);
         return $this->client->exists($key);
+    }
+
+    public function getKey(\DateTime $date): string
+    {
+        return Transaction::formatDate($date);
     }
 }

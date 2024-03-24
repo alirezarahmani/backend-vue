@@ -2,8 +2,6 @@
 
 namespace App\Domain\Events;
 
-use App\Domain\Entity\Transaction;
-use App\Domain\Entity\User;
 use Symfony\Contracts\EventDispatcher\Event;
 
 final class TransactionCachedMissedEvent extends Event

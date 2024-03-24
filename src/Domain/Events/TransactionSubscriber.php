@@ -14,7 +14,7 @@ class TransactionSubscriber implements EventSubscriberInterface
     {
         return [
             TransactionAddedEvent::NAME => 'onTransactionAdded',
-            TransactionCachedMissedEvent::NAME => 'onTransactionMissed',
+            TransactionCachedMissedEvent::NAME => 'onTransactionCacheMissed',
         ];
     }
 
@@ -26,7 +26,7 @@ class TransactionSubscriber implements EventSubscriberInterface
         $redisRepository->addTransaction($transaction);
     }
 
-    public function onTransactionMissed(TransactionCachedMissedEvent $event): void
+    public function onTransactionCacheMissed(TransactionCachedMissedEvent $event): void
     {
         $date = $event->getDate();
         $repository = new TransactionDBRepository();

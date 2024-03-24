@@ -26,6 +26,7 @@ class TransactionRepository extends BaseRepository implements RepositoryInterfac
             'createdAt' => $transaction->getCreatedAt()->format("Y-m-d H:i:s")
         ]);
 
+        // it must go to service container as we do not have it then implement it like this
         $event = new TransactionAddedEvent($transaction);
         $dispatcher = new EventDispatcher();
         $dispatcher->addSubscriber(new TransactionSubscriber());

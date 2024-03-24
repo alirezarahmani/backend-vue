@@ -17,7 +17,8 @@ readonly class GetAllTransactionService
 
     public function get(\DateTime $date): int
     {
-        if (!$this->transactionRedisRepository->exists($date)) {
+        $key = $this->transactionRedisRepository->getKey($date);
+        if (!$this->transactionRedisRepository->exists($key)) {
             $event = new TransactionCachedMissedEvent($date);
             $dispatcher = new EventDispatcher();
             $dispatcher->addSubscriber(new TransactionSubscriber());

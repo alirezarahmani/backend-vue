@@ -3,7 +3,6 @@
 namespace App\Application\ConsoleCommand;
 
 use App\Domain\Services\GetAllTransactionService;
-use App\Infrastructure\Repositories\MeekroDB\TransactionRepository;
 use App\Infrastructure\Repositories\Redis\TransactionRepository as TransactionRedisRepository;
 use Assert\Assertion;
 use Symfony\Component\Console\Attribute\AsCommand;

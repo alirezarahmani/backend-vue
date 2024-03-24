@@ -6,7 +6,6 @@ use DB;
 
 abstract class BaseRepository
 {
-
     public function __construct(protected readonly string $table)
     {
         DB::$user = $_ENV['MYSQL_USER'];;
